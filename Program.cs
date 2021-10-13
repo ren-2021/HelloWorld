@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
- 
+
 namespace HelloWorld
 {
     public class Program
@@ -13,6 +13,7 @@ namespace HelloWorld
             string[] stringBinary = new string[] { "01001000", "01100101", "01101100", "01101100", "01101111", "00101100", "00100000", "01010111", "01101111", "01110010", "01101100", "01100100", "00100001" };
             List<char> letterHW = new List<char> { };
             List<char> stringHW = new List<char> { };
+            Char[] charHW = new Char[13];
             for(int a = 0; a < 13; a++)
             {
                 letterHW.Add(Convert.ToChar(ConvertToString(stringBinary[a])));
@@ -28,18 +29,30 @@ namespace HelloWorld
                     }
                 }
             }
-            var noDupes = stringHW.Distinct().ToList();
-            noDupes.Insert(3, letterHW[2]);
-            noDupes.Insert(8, letterHW[4]);
-            noDupes.Insert(10, letterHW[3]);
-            var qwerty = new string(noDupes.ToArray());
+
+            foreach(char c in stringHW)
+            {
+                if(c.Equals(letterHW[0])){ charHW[0] = c; }
+                else if(c.Equals(letterHW[1])) { charHW[1] = c; }
+                else if (c.Equals(letterHW[2])) { charHW[2] = c; charHW[3] = c; charHW[10] = c; }
+                else if(c.Equals(letterHW[4])) { charHW[4] = c; charHW[8] = c; }
+                else if(c.Equals(letterHW[5])) { charHW[5] = c; }
+                else if(c.Equals(letterHW[6])) { charHW[6] = c; }
+                else if (c.Equals(letterHW[7])) { charHW[7] = c; }
+                else if(c.Equals(letterHW[9])) { charHW[9] = c; }
+                else if(c.Equals(letterHW[11])) { charHW[11] = c; }
+                else if(c.Equals(letterHW[12])) { charHW[12] = c; }
+            }
+
+            var qwerty = new string(charHW.ToArray());
             Console.WriteLine(qwerty);
+            Console.ReadLine();
         }
- 
+
         public static string ConvertToString(string binaryNum)
         {
             List<Byte> helloList = new List<Byte>();
- 
+
             for (int i = 0; i < binaryNum.Length; i += 8)
             {
                 helloList.Add(Convert.ToByte(binaryNum.Substring(i, 8), 2));
